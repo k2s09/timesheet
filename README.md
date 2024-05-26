@@ -16,8 +16,8 @@ mySQL, Express, Node, HTML, CSS, JS & Libraries, hosted on `platforms`.
 
 ## Database Schema
 
-**Table 1: Users**
-userID - String
+**Table 1: Users**  
+userID - String  
 pass - String
 
 **Table 2: Timesheet**  
