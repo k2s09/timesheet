@@ -1,0 +1,153 @@
+html, body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #E8E8E8;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #879EC6;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.left-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.employee-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.logout-btn {
+    padding-bottom: 10px;
+}
+
+.company-logo {
+    padding: 10px 20px;
+}
+
+.logo {
+    max-height: 50px;
+}
+
+.btn {
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.timesheet {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    align-items: flex-end; 
+    padding-top: 80px;
+    border-radius: 10px;
+    width: 80%; /* Adjust the width here */
+    margin: auto; 
+}
+
+.timesheet table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+}
+
+.th, .td {
+    padding: 8px;
+    text-align: left;
+    border: none;
+}
+
+.td {
+    width: 80px; /* Adjust the width of the input fields */
+}
+
+
+.th {
+    font-size: 1.4em;
+}
+
+.tr {
+    padding: 40px;
+}
+
+.timesheet .btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+@media (max-width: 600px) {
+    .timesheet {
+        width: 90vw;
+    }
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .logo {
+        width: 70%;
+    }
+}
+
+.input-field {
+    width: 60%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 1em;
+}
+
+.week-dropdown {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.submit-btn {
+    padding-top: 30px;
+}

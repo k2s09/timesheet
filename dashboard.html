@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Sheet App</title>
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/assets/css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <div class="left-box">
+            <h2>Welcome to Dashboard</h2>
+            
+            <div class="logout-btn" style="padding-bottom: 10px;">
+                <a href="#" id="logout-button" class="btn">Logout</a>
+            </div>
+        </div>
+        <div class="company-logo">
+            <img src="/assets/images/company.svg" alt="Company Logo" class="logo">
+        </div>
+    </div>
+    
+    <!-- Make the timesheet table -->
+    <div class="timesheet">
+        <!-- Add the week dropdown -->
+        <div class="dropdown">
+            <select name="week" id="week" class="week-dropdown">
+                <option value="week1">Week 1</option>
+                <option value="week2">Week 2</option>
+                <option value="week3">Week 3</option>
+                <option value="week4">Week 4</option>
+                <option value="week5">Week 5</option>
+            </select>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="monday"></th>
+                    <th class="tuesday"></th>
+                    <th class="wednesday"></th>
+                    <th class="thursday"></th>
+                    <th class="friday"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PROJECT A</td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                </tr>
+                <tr>
+                    <td>PROJECT B</td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                </tr>
+                <tr>
+                    <td>Leave</td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="submit-btn">
+            <a href="#" id="submit-button" class="btn submit-btn">Submit</a>
+        </div>
+</body>
+</html>
