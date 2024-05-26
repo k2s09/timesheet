@@ -86,8 +86,9 @@ html, body {
 }
 
 
-.th {
+th {
     font-size: 1.4em;
+    text-align: left;
 }
 
 .tr {
@@ -150,4 +151,8 @@ html, body {
 
 .submit-btn {
     padding-top: 30px;
+}
+
+.data-btn {
+    margin-top: 15px;
 }

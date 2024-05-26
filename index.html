@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -25,5 +26,23 @@
             </form>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#login-form').submit(function(event) {
+                event.preventDefault(); // Prevent default form submission
+                const username = $('#username').val();
+                const password = $('#password').val();
+                $.post('/login', { username: username, password: password }, function(data) {
+                    if (data.success) {
+                        window.location.href = 'dashboard.html';
+                    } else {
+                        alert('Login failed. Please check your username and password.');
+                    }
+                }).fail(function() {
+                    alert('Error: Unable to reach the server.');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

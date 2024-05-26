@@ -9,12 +9,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="header">
         <div class="left-box">
             <h2>Welcome to Dashboard</h2>
-            
             <div class="logout-btn" style="padding-bottom: 10px;">
                 <a href="#" id="logout-button" class="btn">Logout</a>
             </div>
@@ -24,9 +24,7 @@
         </div>
     </div>
     
-    <!-- Make the timesheet table -->
     <div class="timesheet">
-        <!-- Add the week dropdown -->
         <div class="dropdown">
             <select name="week" id="week" class="week-dropdown">
                 <option value="week1">Week 1</option>
@@ -35,47 +33,146 @@
                 <option value="week4">Week 4</option>
                 <option value="week5">Week 5</option>
             </select>
+            <button id="getDataButton" class="btn data-btn">Get Data</button>
         </div>
+        
         <table>
             <thead>
                 <tr>
                     <th></th>
-                    <th class="monday"></th>
-                    <th class="tuesday"></th>
-                    <th class="wednesday"></th>
-                    <th class="thursday"></th>
-                    <th class="friday"></th>
+                    <th class="monday">MONDAY</th>
+                    <th class="tuesday">TUESDAY</th>
+                    <th class="wednesday">WEDNESDAY</th>
+                    <th class="thursday">THURSDAY</th>
+                    <th class="friday">FRIDAY</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>PROJECT A</td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field project-a-monday" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field project-a-tuesday" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field project-a-wednesday" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field project-a-thursday" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field project-a-friday" placeholder="Hours"></td>
                 </tr>
                 <tr>
                     <td>PROJECT B</td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field project-b-monday" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field project-b-tuesday" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field project-b-wednesday" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field project-b-thursday" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field project-b-friday" placeholder="Hours"></td>
                 </tr>
                 <tr>
                     <td>Leave</td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
-                    <td><input type="number" min="0" class="input-field" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field leave-monday" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field leave-tuesday" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field leave-wednesday" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field leave-thursday" placeholder="Hours"></td>
+                    <td><input type="number" min="0" class="input-field leave-friday" placeholder="Hours"></td>
                 </tr>
             </tbody>
         </table>
         <div class="submit-btn">
             <a href="#" id="submit-button" class="btn submit-btn">Submit</a>
         </div>
-</body>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+    const logoutButton = document.getElementById('logout-button');
+    const getDataButton = document.getElementById('getDataButton');
+
+    logoutButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        fetch('/logout')
+          .then(response => response.json())
+          .then(data => {
+                if (data.success) {
+                    window.location.href = 'index.html';
+                } else {
+                    alert('Logout failed. Please try again.');
+                }
+            })
+          .catch(() => {
+                alert('Error: Unable to reach the server.');
+            });
+    });
+
+    getDataButton.addEventListener('click', function() {
+        // Hardcoded values for testing
+        const userID = 'John';
+        const selectedWeek = '1'; 
+
+        fetchData(userID, selectedWeek);
+    });
+
+    function fetchData(userID, selectedWeek) {
+        fetch(`/getTimesheet?userId=${encodeURIComponent(userID)}&Week=${encodeURIComponent(selectedWeek)}`, {
+            credentials: 'include' 
+        })
+       .then(response => response.json())
+       .then(data => {
+            populateInputs(data.projectA, 'project-a');
+            populateInputs(data.projectB, 'project-b');
+            populateInputs(data.leave, 'leave');
+        })
+      .catch(error => {
+            console.error("Failed to load timesheet data:", error);
+        });
+    }
+
+    function populateInputs(hoursArray, prefix) {
+        ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'].forEach((day, index) => {
+            const inputField = document.querySelector(`.${prefix}-${day}`);
+            if (inputField) inputField.value = hoursArray[index];
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+
+    const submitButton = document.getElementById('submit-button');
+    submitButton.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        // Assuming userID and week are already available
+        const userID = 'John';
+        const selectedWeek = '1';
+
+        
+        const projectA = getProjectValues('project-a');
+        const projectB = getProjectValues('project-b');
+        const leave = getProjectValues('leave');
+
+        
+        fetch('/updateTimesheet', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userID, week: selectedWeek, projectA, projectB, leave }),
+            credentials: 'include', 
+        })
+       .then(response => response.json())
+       .then(data => {
+            if (data.success) {
+                alert('Timesheet updated successfully');
+            } else {
+                alert('Failed to update timesheet');
+            }
+        })
+       .catch(error => {
+            console.error("Failed to update timesheet data:", error);
+        });
+    });
+
+    function getProjectValues(prefix) {
+        const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+        return days.map(day => parseInt(document.querySelector(`.${prefix}-${day}`).value));
+    }
+});
+
+        </script>
+    </body>
 </html>
